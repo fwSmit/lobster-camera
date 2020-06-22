@@ -1,0 +1,45 @@
+#!/bin/sh
+
+echo "Starting to record now"
+
+
+camera_location=/dev/video0
+file_location=~/Documents/Lobster/filming_script
+# filename="recording-$(date "+%Y-%m-%d-%T").mp4"
+filename="lol.mkv"
+
+mkdir "$file_location"
+cd "$file_location"
+
+## tweak the camera settings
+brightness=0
+contrast=10
+
+v4l2-ctl -d "$camera_location" --set-ctrl brightness=$brightness
+v4l2-ctl -d "$camera_location" --set-ctrl contrast=$contrast
+
+#                     brightness 0x00980900 (int)    : min=-15 max=15 step=1 default=0 value=-1
+#                       contrast 0x00980901 (int)    : min=0 max=30 step=1 default=10 value=0
+#                     saturation 0x00980902 (int)    : min=0 max=60 step=1 default=16 value=16
+# white_balance_temperature_auto 0x0098090c (bool)   : default=0 value=1
+#                          gamma 0x00980910 (int)    : min=40 max=500 step=1 default=220 value=220
+#                           gain 0x00980913 (int)    : min=1 max=100 step=1 default=1 value=1
+#      white_balance_temperature 0x0098091a (int)    : min=1000 max=10000 step=50 default=4500 value=4500 flags=inactive
+#                      sharpness 0x0098091b (int)    : min=0 max=127 step=1 default=16 value=10
+#                  exposure_auto 0x009a0901 (menu)   : min=0 max=3 default=0 value=0
+#              exposure_absolute 0x009a0902 (int)    : min=1 max=10000 step=1 default=312 value=312 flags=inactive
+#                   pan_absolute 0x009a0908 (int)    : min=-648000 max=648000 step=3600 default=0 value=0
+#                  tilt_absolute 0x009a0909 (int)    : min=-648000 max=648000 step=3600 default=0 value=0
+#                  zoom_absolute 0x009a090d (int)    : min=100 max=800 step=1 default=100 value=100
+
+# record at highest quality and resolution with mpeg4 compression
+# Framerate: 60 fps
+# Resolution 2304x1536
+# ffmpeg -s 2304x1536 -f video4linux2 -input_format mjpeg -r 60 -i "$camera_location" -c:v copy -f mp4  "$filename"
+
+
+# record at highest quality and resolution with mpeg4 compression
+# Framerate: 30 fps
+# Resolution 1920x1280
+# ffmpeg -s 1920x1280 -f video4linux2 -input_format mjpeg -i "$camera_location" -an -c:v copy -f mp4 "$filename"
+ffmpeg -s 1920x1280 -f video4linux2 -input_format uyvy422 -i "$camera_location" -an "$filename"
