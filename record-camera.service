@@ -1,0 +1,6 @@
+[Unit]
+Description=Record camera on startup
+
+[Service]
+ExecStart=/usr/bin/record-camera
+After=multi-user.target
