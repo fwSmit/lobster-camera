@@ -2,8 +2,11 @@ import cv2
 
 
 class Camera:
-    # Open the device at the ID 0
+    preview = True
+    record = True
+
     def __init__(self, frame_width, frame_height, framerate, videocodec):
+        # Open the device at the ID 0
         self.cap = cv2.VideoCapture(0)
         # Check whether user selected camera is opened successfully.
         if not (self.cap.isOpened()):
@@ -33,11 +36,18 @@ class Camera:
     def captureFrame(self):
         ret, frame = self.cap.read()
         if ret is True:
-            self.out.write(frame)
-            # Display the resulting frame
-            cv2.imshow('preview', frame)
-            # Waits for a user input to quit the application
+            if self.record:
+                self.out.write(frame)
+            if self.preview:
+                # Display the resulting frame
+                cv2.imshow('preview', frame)
         return ret
+
+    def setPreview(self, preview: bool):
+        self.preview = preview
+
+    def setRecord(self, record: bool):
+        self.record = record
 
 
 class VideoFormats:
