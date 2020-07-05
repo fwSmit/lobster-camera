@@ -20,7 +20,11 @@ sudo apt-get install libgtk2.0-dev
 
 
 ## install opencv
+## ubuntu
 sudo apt-get install python3-opencv
+
+# arch
+# install opencv and python-opencv-python (AUR)
 
 # # if that version isn't recent enough you can install from source
 # tempdir=$(mktemp)
