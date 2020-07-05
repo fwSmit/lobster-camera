@@ -1,9 +1,13 @@
 #!/bin/python3
 
 import cv2
-from Camera import Camera
+from Camera import Camera, VideoFormats
 
-camera = Camera()
+frame_width = 640
+frame_height = 480
+framerate = 30
+camera = Camera(frame_width, frame_height, framerate, VideoFormats.mjpeg)
+
 
 # print openCV version
 print(cv2.__version__)

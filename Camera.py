@@ -3,7 +3,7 @@ import cv2
 
 class Camera:
     # Open the device at the ID 0
-    def __init__(self):
+    def __init__(self, frame_width, frame_height, framerate, videocodec):
         self.cap = cv2.VideoCapture(0)
         # Check whether user selected camera is opened successfully.
         if not (self.cap.isOpened()):
@@ -11,16 +11,17 @@ class Camera:
             return
         #  frame_width = int(cv2.CAP_PROP_FRAME_WIDTH)
         #  frame_height = int(cv2.CAP_PROP_FRAME_HEIGHT)
-        self.frame_width = 640
-        self.frame_height = 480
+        self.frame_width = frame_width
+        self.frame_height = frame_height
+        self.framerate = framerate
 
-        print("Using resolution", self.frame_width, "x", self.frame_height)
+        print("Using resolution", frame_width, "x", frame_height)
 
         # To set the resolution
         # cap.set(cv2.CAP_PROP_FRAME_WIDTH, frame_width)
         # cap.set(cv2.CAP_PROP_FRAME_HEIGHT, frame_height)
 
-        self.out = cv2.VideoWriter('outpy.avi', cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 30, (self.frame_width, self.frame_height))
+        self.out = cv2.VideoWriter('outpy.avi', videocodec, framerate, (frame_width, frame_height))
 
     def release(self):
         # release the camera and the capture
@@ -37,3 +38,8 @@ class Camera:
             cv2.imshow('preview', frame)
             # Waits for a user input to quit the application
         return ret
+
+
+class VideoFormats:
+    mjpeg = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
+    raw = cv2.VideoWriter_fourcc('U', 'Y', 'V', 'Y')
