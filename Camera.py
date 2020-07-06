@@ -6,11 +6,8 @@ class Camera:
     record = True
 
     def __init__(self, frame_width, frame_height, framerate, videocodec):
-        # Open the device at the ID 0
-        self.cap = cv2.VideoCapture(0)
-        # Check whether user selected camera is opened successfully.
-        if not (self.cap.isOpened()):
-            print("Could not open video device")
+        ret = self.attatch(0)
+        if not ret:
             return
         #  frame_width = int(cv2.CAP_PROP_FRAME_WIDTH)
         #  frame_height = int(cv2.CAP_PROP_FRAME_HEIGHT)
@@ -25,6 +22,15 @@ class Camera:
         # cap.set(cv2.CAP_PROP_FRAME_HEIGHT, frame_height)
 
         self.out = cv2.VideoWriter('outpy.avi', videocodec, framerate, (frame_width, frame_height))
+
+    def attatch(self, number):
+        # Open the device at the ID 'number'
+        self.cap = cv2.VideoCapture(number)
+        # Check whether user selected camera is opened successfully.
+        if not (self.cap.isOpened()):
+            print("Could not open video device")
+            return False
+        return True
 
     def release(self):
         # release the camera and the capture
@@ -42,6 +48,9 @@ class Camera:
                 # Display the resulting frame
                 cv2.imshow('preview', frame)
         return ret
+
+    def __del__(self):
+        self.release()
 
     def setPreview(self, preview: bool):
         self.preview = preview

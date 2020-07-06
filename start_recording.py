@@ -20,5 +20,3 @@ while(True):
             break
     else:
         break
-
-camera.release()
