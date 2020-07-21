@@ -1,7 +1,10 @@
 #!/bin/python3
 
 import cv2
-from Camera import Camera, VideoFormats
+from Camera import Camera, Resolutions
+
+# print openCV version
+print("Using openCV version ", cv2.__version__)
 
 #  frame_width = 640
 #  frame_height = 480
@@ -13,11 +16,10 @@ frame_width = 1280
 frame_height = 720
 framerate = 60.0
 
-camera = Camera(frame_width, frame_height, framerate, VideoFormats.mjpeg)
+#  camera = Camera(frame_width, frame_height, framerate, VideoFormats.mjpeg)
 
+camera = Camera.fromEnum(Resolutions.RAW_480_60)
 
-# print openCV version
-print(cv2.__version__)
 
 while(True):
     ret = camera.captureFrame()
@@ -28,5 +30,5 @@ while(True):
     else:
         # the camera failed to record a frame so abort
         break
-    
+
 camera.release()

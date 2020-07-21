@@ -1,0 +1,51 @@
+ioctl: VIDIOC_ENUM_FMT
+        Type: Video Capture
+
+        [0]: 'UYVY' (UYVY 4:2:2)
+                Size: Discrete 1280x720
+                        Interval: Discrete 0.017s (60.000 fps)
+                        Interval: Discrete 0.033s (30.000 fps)
+                Size: Discrete 1920x1080
+                        Interval: Discrete 0.017s (60.000 fps)
+                        Interval: Discrete 0.033s (30.000 fps)
+                        Interval: Discrete 0.067s (15.000 fps)
+                Size: Discrete 2304x1296
+                        Interval: Discrete 0.033s (30.000 fps)
+                        Interval: Discrete 0.067s (15.000 fps)
+                Size: Discrete 2304x1536
+                        Interval: Discrete 0.042s (24.000 fps)
+                        Interval: Discrete 0.083s (12.000 fps)
+                Size: Discrete 640x480
+                        Interval: Discrete 0.017s (60.000 fps)
+                        Interval: Discrete 0.033s (30.000 fps)
+                Size: Discrete 1920x1280
+                        Interval: Discrete 0.020s (50.000 fps)
+                        Interval: Discrete 0.040s (25.000 fps)
+                Size: Discrete 1152x768
+                        Interval: Discrete 0.017s (60.000 fps)
+                        Interval: Discrete 0.033s (30.000 fps)
+                Size: Discrete 2048x1536
+                        Interval: Discrete 0.024s (42.000 fps)
+                        Interval: Discrete 0.048s (21.000 fps)
+                Size: Discrete 1280x960
+                        Interval: Discrete 0.017s (58.000 fps)
+                        Interval: Discrete 0.033s (30.000 fps)
+        [1]: 'MJPG' (Motion-JPEG, compressed)
+                Size: Discrete 1280x720
+                        Interval: Discrete 0.017s (60.000 fps)
+                Size: Discrete 1920x1080
+                        Interval: Discrete 0.017s (60.000 fps)
+                Size: Discrete 2304x1296
+                        Interval: Discrete 0.017s (60.000 fps)
+                Size: Discrete 2304x1536
+                        Interval: Discrete 0.021s (48.000 fps)
+                Size: Discrete 640x480
+                        Interval: Discrete 0.017s (60.000 fps)
+                Size: Discrete 1920x1280
+                        Interval: Discrete 0.020s (50.000 fps)
+                Size: Discrete 1152x768
+                        Interval: Discrete 0.017s (60.000 fps)
+                Size: Discrete 2048x1536
+                        Interval: Discrete 0.020s (50.000 fps)
+                Size: Discrete 1280x960
+                        Interval: Discrete 0.017s (58.000 fps)

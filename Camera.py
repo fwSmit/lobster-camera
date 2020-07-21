@@ -1,37 +1,39 @@
 import cv2
-from enum import Enum
+from enum import IntEnum
 
 
 class VideoFormats:
     mjpeg = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
-    raw = cv2.VideoWriter_fourcc('U', 'Y', 'V', 'Y')
+    #  raw = cv2.VideoWriter_fourcc('U', 'Y', 'V', 'Y')
+    raw = cv2.VideoWriter_fourcc('Y', 'U', 'Y', 'V')
 
 
 class VideoResolutions:
-    horizontal_res = [640, 1920]
-    vertical_res = [480, 1080]
-    framerates = [60, 60]
-    videoFormats = [VideoFormats.mjpeg, VideoFormats.mjpeg]
+    horizontal_res = [640, 1920, 640]
+    vertical_res = [480, 1080, 480]
+    framerates = [60, 60, 60]
+    videoFormats = [VideoFormats.mjpeg, VideoFormats.mjpeg, VideoFormats.raw]
 
     def __init__(self, val):
         self.value = val
 
     def get_horizontal_res(self):
-        return self.horizontal_res[self.value]
+        return self.horizontal_res[int(self.value)]
 
     def get_vertical_res(self):
-        return self.vertical_res[self.value]
+        return self.vertical_res[int(self.value)]
 
     def get_framerate(self):
-        return self.framerates[self.value]
+        return self.framerates[int(self.value)]
 
     def get_videoformat(self):
-        return self.videoformats[self.value]
+        return self.videoFormats[int(self.value)]
 
 
-class Resolutions(Enum):
+class Resolutions(IntEnum):
     MJPEG_480 = 0
     MJPEG_1080 = 1
+    RAW_480_60 = 2
 
 
 class Camera:
@@ -40,15 +42,12 @@ class Camera:
 
     #  def __init__(self, resolution: Resolutions):
 
-        #  frame_width = resolution
-        #  frame_height = frame_height
-        #  framerate = framerate
 
     def __init__(self, frame_width, frame_height, framerate, videocodec):
         camera_number = 4  # the location of the camera (/dev/video*)
         ret = self.attatch(camera_number)
         if not ret:
-            print("Could not find camera in /dev/video", camera_number)
+            print("Could not find camera in /dev/video%d" % camera_number)
             return
         #  frame_width = int(cv2.CAP_PROP_FRAME_WIDTH)
         #  frame_height = int(cv2.CAP_PROP_FRAME_HEIGHT)
@@ -67,6 +66,16 @@ class Camera:
         print(ret1, ret2, ret3, ret4)
 
         self.out = cv2.VideoWriter('outpy.avi', videocodec, framerate, (frame_width, frame_height))
+
+    @classmethod
+    def fromEnum(cls, number):
+        res = VideoResolutions(number)
+        frame_width = res.get_horizontal_res()
+        frame_height = res.get_vertical_res()
+        framerate = res.get_framerate()
+        codec = res.get_videoformat()
+        print("fram height", frame_height)
+        return cls(frame_width, frame_height, framerate, codec)
 
     def attatch(self, number):
         # Open the device at the ID 'number'
