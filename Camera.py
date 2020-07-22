@@ -9,10 +9,12 @@ class VideoFormats:
 
 
 class VideoResolutions:
-    horizontal_res = [640, 1920, 640]
-    vertical_res = [480, 1080, 480]
-    framerates = [60, 60, 60]
-    videoFormats = [VideoFormats.mjpeg, VideoFormats.mjpeg, VideoFormats.raw]
+    m = VideoFormats.mjpeg
+    r = VideoFormats.raw
+    horizontal_res = [720, 1080, 1296, 1536, 480, 1280, 768, 1536, 960, 1280, 1280, 1920, 1920, 1920, 2304, 2304, 2304, 2304, 640, 640, 1920, 1920, 1152, 1152, 2048, 2048, 1280, 1280]
+    vertical_res = [1280, 1920, 2304, 2304, 640, 1920, 1152, 2048, 1280, 720, 720, 1080, 1080, 1080, 1296, 1296, 1536, 1536, 480, 480, 1280, 1280, 768, 768, 1536, 1536, 960, 960]
+    frame_rates = [60, 60, 60, 48, 60, 50, 60, 50, 58, 60, 30, 60, 30, 15, 30, 15, 24, 12, 60, 30, 50, 25, 60, 30, 42, 21, 58, 30]
+    videoFormats = [m, m, m, m, m, m, m, m, m, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r, r]
 
     def __init__(self, val):
         self.value = val
@@ -41,7 +43,6 @@ class Camera:
     record = True
 
     #  def __init__(self, resolution: Resolutions):
-
 
     def __init__(self, frame_width, frame_height, framerate, videocodec):
         camera_number = 4  # the location of the camera (/dev/video*)
@@ -112,5 +113,3 @@ class Camera:
 
     def setRecord(self, record: bool):
         self.record = record
-
-
